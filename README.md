@@ -39,6 +39,8 @@ Azure tenant ID
 
 Azure resource ID (in the following format: `/subscriptions/<subscriptionId>/resourceGroups/<resourceGroupName>/providers/<resourceProviderNamespace>/<resourceType>/<resourceName>`)
 
+Note: see [Azure documentation about roles, permissions and security with Azure Monitor](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-roles-permissions-security) to limit access to resources for monitoring.
+
     -M METRIC, --metric=METRIC
 
 Metric (see https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/monitoring-supported-metrics for a list of all metrics available for each resource type)
