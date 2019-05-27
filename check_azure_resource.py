@@ -166,12 +166,11 @@ class NagiosAzureResourceMonitor(Plugin):
     def _get_metric_value(self):
         """Get latest metric value available for the Azure resource object."""
 
-        query = {'metric': self['metric']}
+        query = {'metricnames': self['metric']}
         if self['dimension'] is not None:
             query['$filter'] = "{} eq '{}'".format(self['dimension'], self['dimension-value'])
 
-        path = '{}/providers/Microsoft.Insights/metrics/{}'.format(self['resource'],
-                                                                   self['metric'])
+        path = '{}/providers/Microsoft.Insights/metrics/'.format(self['resource'])
 
         try:
             metric_values = _call_arm_rest_api(self._client, path,
