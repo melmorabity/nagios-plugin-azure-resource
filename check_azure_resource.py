@@ -61,7 +61,7 @@ class NagiosAzureResourceMonitor(Plugin):
     """Implements functionalities to grab metrics from Azure resource objects."""
 
     DEFAULT_AZURE_SERVICE_HOST = 'management.azure.com'
-    _AZURE_METRICS_API = '2017-05-01-preview'
+    _AZURE_METRICS_API = '2018-01-01'
     _AZURE_METRICS_UNIT_SYMBOLS = {'Percent': '%', 'Bytes': 'B', 'Seconds': 's'}
 
     def __init__(self, *args, **kwargs):
