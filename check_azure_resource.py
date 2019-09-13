@@ -80,6 +80,7 @@ class NagiosAzureResourceMonitor(Plugin):
         self.add_arg('M', 'metric', 'Metric')
         self.add_arg('D', 'dimension', 'Metric dimension', required=None)
         self.add_arg('V', 'dimension-value', 'Metric dimension value', required=None)
+        self.add_arg('I', 'inverse-flag', 'Inverted metric flag', required=None)
 
     def activate(self):
         """Parse out all command line options and get ready to process the plugin."""
@@ -201,7 +202,10 @@ class NagiosAzureResourceMonitor(Plugin):
             if self['dimension'] is not None:
                 message += ' and dimension {}'.format(self['dimension'])
             self.nagios_exit(Plugins.UNKNOWN, message)
-
+      
+        if self['inverse-flag'] is not None:
+          value := -value;
+                    
         status = Plugins.check_threshold(value, warning=self['warning'], critical=self['critical'])
 
         unit = self._AZURE_METRICS_UNIT_SYMBOLS.get(self._metric_properties['unit'])
