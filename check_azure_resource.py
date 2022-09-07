@@ -36,11 +36,24 @@ def _call_arm_rest_api(client, path, api_version, method='GET', body=None, query
     request = getattr(client, method.lower())(
         url=path, params=dict(query or {}, **{'api-version': api_version})
     )
-    response = client.send(
-        request=request, content=body,
-        headers=dict(headers or {}, **{'Content-Type': 'application/json; charset=utf-8'}),
-        timeout=timeout
-    )
+    
+    count=0
+    timeout=10
+    while True:
+        try:
+            count+=1
+            response = client.send(
+                request=request, content=body,
+                headers=dict(headers or {}, **{'Content-Type': 'application/json; charset=utf-8'}),
+                timeout=timeout
+            )
+        except:
+            timeout+=1
+            if count >= 9:
+                print(f'Timeout! {timeout:.2f}')
+                break
+        else:
+            break
 
     try:
         response.raise_for_status()
